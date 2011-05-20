@@ -30,7 +30,6 @@ public class Authed extends JavaPlugin {
 	
 	public List<String> loggedInPlayers = new ArrayList<String>();
 	public HashMap<String, HashMap<Integer, ItemStack>> stolenInventory = new HashMap<String, HashMap<Integer, ItemStack>>();
-	public HashMap<String, Integer> loginSecond = new HashMap<String, Integer>();
 	
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
