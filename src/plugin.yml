@@ -1,0 +1,10 @@
+name: Authed
+main: co.cc.vijfhoek.authed.Authed
+version: 0.1
+commands:
+  login:
+    description: Log into your account
+    usage: /login <password>
+  register:
+    description: Register your name
+    usage: /register <password>
