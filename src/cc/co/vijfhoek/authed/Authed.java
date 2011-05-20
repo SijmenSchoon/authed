@@ -111,7 +111,7 @@ public class Authed extends JavaPlugin {
 			if (cmdArgs.length != 1) return false;
 			cfgAccounts.load();
 			
-			// Check whether the user alreayd has an account
+			// Check whether the user already has an account
 			if (cfgAccounts.getNode(player.getName()) != null) {
 				player.sendMessage(ChatColor.RED + "You already have an account");
 				return true;
