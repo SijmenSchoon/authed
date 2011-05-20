@@ -29,7 +29,7 @@ public class Authed extends JavaPlugin {
 	public Configuration cfgAccounts = null;
 	
 	public List<String> loggedInPlayers = new ArrayList<String>();
-	public HashMap<String, HashMap<Integer, ItemStack>> stolenInventory = new HashMap<String, HashMap<Integer, ItemStack>>();
+	public HashMap<String, HashMap<Integer, ItemStack>> stolenInventories = new HashMap<String, HashMap<Integer, ItemStack>>();
 	
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
@@ -136,7 +136,7 @@ public class Authed extends JavaPlugin {
 				if (item.getAmount() == 0) continue;
 				items.put(i, item);
 			}
-			stolenInventory.put(name, items);
+			stolenInventories.put(name, items);
 			
 			// Clear the player's inventory
 			player.getInventory().clear();
@@ -145,12 +145,12 @@ public class Authed extends JavaPlugin {
 	
 	public void returnInventory(Player player) {
 		String name = player.getName();
-		if (stolenInventory.containsKey(name)) {
+		if (stolenInventories.containsKey(name)) {
 			// Clear the player's inventory
 			player.getInventory().clear();
 			
 			// Retrieve the inventory from stolenInventory
-			HashMap<Integer, ItemStack> items = stolenInventory.get(name);
+			HashMap<Integer, ItemStack> items = stolenInventories.get(name);
 			
 			// Put the inventory back
 			for (int i = 0; i < 36; i++) {
@@ -162,7 +162,7 @@ public class Authed extends JavaPlugin {
 			}
 			
 			// Remove the inventory from stolenInventory
-			stolenInventory.remove(name);
+			stolenInventories.remove(name);
 		}
 	}
 }

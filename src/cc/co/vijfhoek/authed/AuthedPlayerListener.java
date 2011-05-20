@@ -41,15 +41,15 @@ public class AuthedPlayerListener extends PlayerListener {
 		authed.loggedInPlayers.remove(name);
 		
 		// Put back the inventory
-		if (authed.stolenInventory.containsKey(name)) {
-			HashMap<Integer, ItemStack> items = authed.stolenInventory.get(name);
+		if (authed.stolenInventories.containsKey(name)) {
+			HashMap<Integer, ItemStack> items = authed.stolenInventories.get(name);
 			for (int i = 0; i < 36; i++) {
 				if (!items.containsKey(i)) continue;
 				ItemStack item = items.get(i);
 				if (item.getAmount() == 0) continue;
 				try { player.getInventory().setItem(i, item); } catch (Exception ex) {}
 			}
-			authed.stolenInventory.remove(name);
+			authed.stolenInventories.remove(name);
 		}
 	}
 	
