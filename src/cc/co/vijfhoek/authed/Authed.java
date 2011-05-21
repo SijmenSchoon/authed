@@ -52,7 +52,12 @@ public class Authed extends JavaPlugin {
 	}
 	
 	public void onDisable() {
-		
+		// Return the inventories of loggedin users
+		Player[] players = getServer().getOnlinePlayers();
+		for (int i = 0; i < players.length; i++) {
+			Player player = players[i];
+			returnInventory(player);
+		}
 		log.info("[Authed] Disabled");
 	}
 	
