@@ -42,10 +42,8 @@ public class Authed extends JavaPlugin {
 		cfgAccounts.load();
 		
 		// Steal the inventories of registered users
-		Player[] players = getServer().getOnlinePlayers();
-		for (int i = 0; i < players.length; i++) {
-			Player player = players[i];
-			stealInventory(player);
+		returnAllInventories();
+		for (Player player : getServer().getOnlinePlayers()) {
 			player.sendMessage(ChatColor.DARK_PURPLE + "Due to server maintenance, you will have");
 			player.sendMessage(ChatColor.DARK_PURPLE + "to login again: /login <password>");
 		}
@@ -53,11 +51,8 @@ public class Authed extends JavaPlugin {
 	
 	public void onDisable() {
 		// Return the inventories of loggedin users
-		Player[] players = getServer().getOnlinePlayers();
-		for (int i = 0; i < players.length; i++) {
-			Player player = players[i];
-			returnInventory(player);
-		}
+		returnAllInventories();
+		
 		log.info("[Authed] Disabled");
 	}
 	
@@ -168,6 +163,18 @@ public class Authed extends JavaPlugin {
 			
 			// Remove the inventory from stolenInventory
 			stolenInventories.remove(name);
+		}
+	}
+	
+	public void stealAllInventories() {
+		for (Player player : getServer().getOnlinePlayers()) {
+			stealInventory(player);
+		}
+	}
+	
+	public void returnAllInventories() {
+		for (Player player : getServer().getOnlinePlayers()) {
+			returnInventory(player);
 		}
 	}
 }
