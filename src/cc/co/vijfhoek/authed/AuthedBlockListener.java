@@ -14,11 +14,11 @@ public class AuthedBlockListener extends BlockListener {
 		String name = event.getPlayer().getName();
 		Player player = event.getPlayer();
 		
-		authed.cfgAccounts.load();
+		Authed.cfgAccounts.load();
 		
 		try {
 			if (!authed.loggedInPlayers.contains(name)) {
-				if (authed.cfgAccounts.getNode(name) != null) {
+				if (Authed.cfgAccounts.getBoolean(name + ".restrict.break", false)) {
 					player.sendMessage(ChatColor.RED + "Please log in first: /login <password>");
 					event.setCancelled(true);
 				}
@@ -33,11 +33,11 @@ public class AuthedBlockListener extends BlockListener {
 		String name = event.getPlayer().getName();
 		Player player = event.getPlayer();
 		
-		authed.cfgAccounts.load();
+		Authed.cfgAccounts.load();
 		
 		try {
 			if (!authed.loggedInPlayers.contains(name)) {
-				if (authed.cfgAccounts.getNode(name) != null) {
+				if (Authed.cfgAccounts.getBoolean(name + ".restrict.place", false)) {
 					player.sendMessage(ChatColor.RED + "Please log in first: /login <password>");
 					event.setCancelled(true);
 				}

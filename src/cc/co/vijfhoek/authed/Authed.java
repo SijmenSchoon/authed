@@ -26,7 +26,7 @@ public class Authed extends JavaPlugin {
 	public File fleConfigDir = null;
 	public File fleAccounts = null;
 	
-	public Configuration cfgAccounts = null;
+	public static Configuration cfgAccounts = new Configuration((new Authed()).fleAccounts);
 	
 	public List<String> loggedInPlayers = new ArrayList<String>();
 	public HashMap<String, HashMap<Integer, ItemStack>> stolenInventories = new HashMap<String, HashMap<Integer, ItemStack>>();
@@ -38,8 +38,6 @@ public class Authed extends JavaPlugin {
 		fleConfigDir = new File("plugins" + File.separator + "Authed");
 		fleConfigDir.mkdirs();
 		fleAccounts = new File("plugins" + File.separator + "Authed" + File.separator + "accounts.yml");
-		cfgAccounts = new Configuration(fleAccounts);
-		cfgAccounts.load();
 		
 		// Steal the inventories of registered users
 		returnAllInventories();
@@ -117,6 +115,8 @@ public class Authed extends JavaPlugin {
 			}
 			
 			cfgAccounts.setProperty(name + ".password", cmdArgs[0].hashCode());
+			cfgAccounts.setProperty(name + ".restrict.break", true);
+			cfgAccounts.setProperty(name + ".restrict.place", true);
 			cfgAccounts.save();
 			
 			player.sendMessage(ChatColor.GREEN + "Created account successfully");
