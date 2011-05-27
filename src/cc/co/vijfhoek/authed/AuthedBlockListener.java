@@ -14,12 +14,16 @@ public class AuthedBlockListener extends BlockListener {
 		String name = event.getPlayer().getName();
 		Player player = event.getPlayer();
 		
-		if (!authed.loggedInPlayers.contains(name)) {
-			if (authed.cfgAccounts.getNode(name) != null) {
-				player.sendMessage(ChatColor.RED + "Please log in first: /login <password>");
-				event.setCancelled(true);
+		authed.cfgAccounts.load();
+		
+		try {
+			if (!authed.loggedInPlayers.contains(name)) {
+				if (authed.cfgAccounts.getNode(name) != null) {
+					player.sendMessage(ChatColor.RED + "Please log in first: /login <password>");
+					event.setCancelled(true);
+				}
 			}
-		}
+		} catch (Exception e) {}
 	}
 	
 	public void onBlockPlace (BlockPlaceEvent event) {
@@ -29,11 +33,15 @@ public class AuthedBlockListener extends BlockListener {
 		String name = event.getPlayer().getName();
 		Player player = event.getPlayer();
 		
-		if (!authed.loggedInPlayers.contains(name)) {
-			if (authed.cfgAccounts.getNode(name) != null) {
-				player.sendMessage(ChatColor.RED + "Please log in first: /login <password>");
-				event.setCancelled(true);
+		authed.cfgAccounts.load();
+		
+		try {
+			if (!authed.loggedInPlayers.contains(name)) {
+				if (authed.cfgAccounts.getNode(name) != null) {
+					player.sendMessage(ChatColor.RED + "Please log in first: /login <password>");
+					event.setCancelled(true);
+				}
 			}
-		}
+		} catch (Exception e) {}
 	}
 }
