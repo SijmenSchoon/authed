@@ -1,6 +1,6 @@
 name: Authed
-main: co.cc.vijfhoek.authed.Authed
-version: 0.1
+main: cc.co.vijfhoek.authed.Authed
+version: 0.3
 commands:
   login:
     description: Log into your account
