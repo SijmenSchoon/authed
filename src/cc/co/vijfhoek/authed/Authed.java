@@ -20,24 +20,31 @@ import org.bukkit.util.config.Configuration;
 public class Authed extends JavaPlugin {
 	public static Logger log = Logger.getLogger("Minecraft");
 	
-	AuthedBlockListener blockListener = new AuthedBlockListener();
-	AuthedPlayerListener playerListener = new AuthedPlayerListener();
+	AuthedBlockListener blockListener;
+	AuthedPlayerListener playerListener;
 	
-	public File fleConfigDir = null;
-	public File fleAccounts = null;
+	public File fleConfigDir;
+	public File fleAccounts;
 	
-	public static Configuration cfgAccounts = new Configuration((new Authed()).fleAccounts);
+	public Configuration cfgAccounts;
 	
-	public List<String> loggedInPlayers = new ArrayList<String>();
+	public List<String> loggedInPlayers;
 	public HashMap<String, HashMap<Integer, ItemStack>> stolenInventories = new HashMap<String, HashMap<Integer, ItemStack>>();
 	
 	public void onEnable() {
+		loggedInPlayers = new ArrayList<String>();
+		
+		blockListener = new AuthedBlockListener();
+		playerListener = new AuthedPlayerListener();
+		
 		PluginManager pm = getServer().getPluginManager();
 		regEvents(pm);
 		
 		fleConfigDir = new File("plugins" + File.separator + "Authed");
 		fleConfigDir.mkdirs();
 		fleAccounts = new File("plugins" + File.separator + "Authed" + File.separator + "accounts.yml");
+		
+		cfgAccounts = new Configuration(fleAccounts);
 		
 		// Steal the inventories of registered users
 		returnAllInventories();

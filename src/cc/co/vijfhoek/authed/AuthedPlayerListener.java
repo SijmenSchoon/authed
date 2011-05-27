@@ -63,7 +63,7 @@ public class AuthedPlayerListener extends PlayerListener {
 		
 		// Block all commands from users that aren't logged in
 		if (!(event.getMessage().startsWith("/login")) && !(authed.loggedInPlayers.contains(event.getPlayer().getName()))) {
-			if (Authed.cfgAccounts.getNode(name) != null) {
+			if (authed.cfgAccounts.getNode(name) != null) {
 				event.getPlayer().sendMessage(ChatColor.RED + "Please log in first: /login <password>");
 				event.setCancelled(true);
 			}
